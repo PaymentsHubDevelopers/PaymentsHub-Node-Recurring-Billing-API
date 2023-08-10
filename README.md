@@ -6,8 +6,13 @@ This is a Node.js ecommerce application that embeds a checkout form for subscrip
 
 To get started, create a free [Payments Hub Developer Portal account](https://developer.paymentshub.com/auth/signup). This will allow you to get the sandbox credentials that are required to test the app. After you log in, check out the official [Recurring Billing API Specification](https://developer.paymentshub.com/products/card-not-present/recurring-billing-api/recurring-billing/production/createandmanagesubscriptions), then [contact](https://developer.paymentshub.com/contact) the Payments Hub Sales Engineering team to get sandbox credentials added to your Developer Portal account.
 
+## Follow Along with the Tutorial
+
+When you're ready to start building your app, you can follow along with [this tutorial](
+https://developer.paymentshub.com/blog/tutorial-nodejs-recurring-billing-api) for step-by-step instructions.
+
 ## Completed App
 
 Your completed payment app will look similar to the following:
 
-![payments-hub-node-recurring-billing-api-payment-form](https://github.com/PaymentsHubDevelopers/PaymentsHub-Node-Recurring-Billing-API/assets/136620102/e3da4286-c28b-41a6-91ce-c63eafa171f5)
+![payments-hub-node-recurring-billing-api-payment-form](https://github.com/PaymentsHubDevelopers/PaymentsHub-Node-Recurring-Billing-API/assets/136620102/0cdf0e5b-ab23-4edb-b071-10cd1e4547d2)
