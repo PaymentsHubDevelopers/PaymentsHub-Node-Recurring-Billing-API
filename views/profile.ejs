@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <style>
+   	body {
+       	max-width: 500px;
+       	margin: 20px auto;
+       	padding: 1rem;
+   	}
+
+   	h3 {
+       	text-align: center;
+       	text-decoration: underline;
+   	}
+   </style>
+</head>
+<body>
+   <h3>My Profile</h3>
+   <div>
+   	<p>Name: <%=customer.firstName%> <%=customer.lastName%></p>
+   	<p>Email: <%=customer.email%> </p>
+   	<p>Phone: <%=customer.phone%> </p>
+   	<p>Plan: <%=data.Description%> </p>
+   	<p>Amount: <%=data.Amount%> billed <%=data.Frequency%> </p>
+   </div>
+
+   <div>
+   	<button id="upgrade">Upgrade subscription</button>
+   </div>
+
+   <script>
+   	const upgradeBtn = document.getElementById('upgrade')
+
+   	// extract subscription ID from URL
+   	const id = new URLSearchParams(window.location.search).get('id')
+
+   	// update subscription
+   	upgradeBtn.addEventListener('click', () => fetch('http://localhost:3000/upgrade', {
+       	method: 'POST',
+       	headers: {
+               	'Content-Type': 'application/json'
+           	},
+           	body: JSON.stringify({
+               	id,
+               	Amount: 29.99
+           	})
+   	}).then(res => window.location.reload())
+   	)
+   </script>
+</body>
+</html>

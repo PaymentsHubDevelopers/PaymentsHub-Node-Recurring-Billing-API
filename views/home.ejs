@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8"> 
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Payments Hub Developers | Recurring Billing API</title>
+   <style>
+	@font-face {
+	font-family: 'Figtree';
+	src: url('./assets/Figtree-VariableFont_wght.ttf') format('truetype');
+	font-weight: 700;
+	font-style: normal;
+	}
+
+   	body {
+       	max-width: 500px;
+       	margin: 20px auto;
+       	padding: 1rem;
+		font-family: 'Figtree', sans-serif;
+		background-color: #222529;
+		color: #9A9FA2;
+   	}
+
+	h1 {
+		font-size: 28px;
+		color: #fff;
+		text-align: center;
+	}
+
+	h2 {
+		font-size: 24px;
+		color: #1FC4B3;
+		text-align: center;
+	}
+
+	h3 {
+		font-size: 18px;
+		color: #222529;
+	}
+
+	h4 {
+		font-size: 18px;
+		color: #222529;
+		margin-top: 50px;
+	}
+
+	form {
+		background-color: #fff;
+		padding: 15px;
+		border-radius: 5px;
+		color: #222529;
+	}
+
+	.form-label {
+		font-family: 'Figtree', sans-serif;
+		color: #222529;
+	}
+
+	.form-input {
+		font-family: 'Figtree', sans-serif;
+		color: #9A9FA2;
+	}
+
+	#submit {
+		margin-top: 25px;
+		font-family: 'Figtree', sans-serif;
+	}
+
+	.details > div {
+		margin-top: 1rem;
+		display: flex;
+		flex-direction: column;
+	}
+
+	button {
+		background-color: #1FC4B3;
+		border: none;
+		color: #fff;
+		padding: 8px;
+		border-radius: 5px;
+		font-family: 'Figtree', sans-serif;
+	}
+
+	button:hover {
+		background-color: #16A092;
+	}
+   </style>
+</head>
+<body>
+	<h1>Payments Hub Developers</h1>
+	<h2>Recurring Billing API</h2>
+   <form id="form">
+	<h3>Choose A Subscription Plan</h3>
+	<button id="basic">Basic</button>
+	<button id="premium">Premium</button>
+   	<h4>Personal Details</h4>
+   	<div class="details">
+       	<div>
+           	<label class="form-label">First Name</label>
+           	<input type="text" id="firstName" value="John" class="form-input">
+       	</div>
+       	<div>
+           	<label class="form-label">Last Name</label>
+           	<input type="text" id="lastName" value="Smith" class="form-input">
+       	</div>
+       	<div>
+           	<label class="form-label">Phone</label>
+           	<input type="text" id="phone" value="1234567890" class="form-input">
+       	</div>
+       	<div>
+           	<label class="form-label">Email</label>
+           	<input type="email" id="email" value="jsmith@email.com" class="form-input">
+       	</div>
+   	</div>
+
+   	<h4>Payment Details</h4>
+   	<div class="details">
+       	<div>
+           	<label class="form-label">Account Number</label>
+           	<input type="number" id="accountNo" value="4111111111111111" class="form-input">
+       	</div>
+       	<div>
+           	<label class="form-label">CVV</label>
+           	<input type="number" id="cvv" value="123" class="form-input">
+       	</div>
+       	<div>
+           	<label class="form-label">Expiration Date</label>
+           	<input type="number" id="expiry" value="2208" class="form-input">
+       	</div>
+   	</div>
+
+   	<button type="submit" id="submit">Sign up</button>
+   </form>
+
+   <script>
+   	const basicBtn = document.getElementById('basic')
+   	const premiumBtn = document.getElementById('premium')
+
+   	let PlanType = ''
+   	let Amount
+
+   	basicBtn.addEventListener('click', () => {
+       	PlanType = 'basic'
+       	Amount = 10.99
+   	})
+
+   	premiumBtn.addEventListener('click', () => {
+       	PlanType = 'premium'
+       	Amount = 29.99
+   	})
+
+   	const form = document.getElementById('form')
+
+   	form.addEventListener('submit', (e) => {
+       	e.preventDefault()
+
+       	const customerDetails = {
+           	FirstName: document.getElementById('firstName').value,
+           	LastName: document.getElementById('lastName').value,
+           	Phone: document.getElementById('phone').value,
+           	Email: document.getElementById('email').value,
+           	AccountNumber: document.getElementById('accountNo').value,
+           	CVV: document.getElementById('cvv').value,
+           	ExpirationDate: document.getElementById('expiry').value,
+           	PlanType,
+           	Amount
+       	}
+     	 
+       	fetch('http://localhost:3000/signup', {
+           	method: 'POST',
+           	headers: {
+               	'Content-Type': 'application/json'
+           	},
+           	body: JSON.stringify({
+               	customerDetails
+           	})
+       	})
+       	.then((res) => res.json()
+       	.then(json => {
+           	console.log(json)
+           	if(json.success === true){
+               	window.location.assign(`http://localhost:3000/profile?id=${json.id}`)
+           	}else {
+               	alert('An error occurred')
+           	}
+       	})
+       	)
+   	})
+   </script>
+</body>
+</html>
